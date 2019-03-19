@@ -1,0 +1,17 @@
+version: 2
+jobs: 
+  build:
+    docker:
+      - image: circleci/android:api-28
+      working_directory: ~/SimpleWarikan
+      environment:
+        JVM_OPTS: -Xmx3200m
+        TERM: dumb
+      steps:
+        - checkout
+        - run:
+            name: Download Dependencies
+            command: ./gradlew androidDependencies
+        - run:
+          	name: build app
+          	command: ./gradlew assembleDebug
